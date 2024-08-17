@@ -1,0 +1,24 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Classification Result</h1>
+    <div class="card">
+        <div class="card-body">
+            <style>
+                .responsive-img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            </style>
+            <img src="{{ image.file.url }}" alt="{{ image.original_name }}" class="responsive-img">
+            <h3 class="card-text">{{ image.original_name }}</h3>
+            {% if predicted_class %}
+            <p>Predicted Class: <strong>{{ predicted_class }}</strong></p>
+            {% elif error %}
+            <p>Error: {{ error }}</p>
+            {% endif %}
+            <a href="{% url 'image_process:my_images' %}" class="btn">Back to My Images</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

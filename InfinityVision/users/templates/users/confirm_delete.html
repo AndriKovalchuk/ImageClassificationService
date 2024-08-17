@@ -1,0 +1,68 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+<head>
+    <style>
+        .confirmation-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .confirmation-container h2 {
+            color: #dc3545; /* Red color for heading */
+            margin-bottom: 20px;
+        }
+
+        .confirmation-container p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .confirmation-container button {
+            background-color: #dc3545; /* Red color for button */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .confirmation-container button:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+
+        .confirmation-container a {
+            color: #007bff; /* Blue color for the link */
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .confirmation-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+    <div class="confirmation-container">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Delete Account</button>
+            <a href="{% url 'users:user_view' user.username %}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
