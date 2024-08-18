@@ -1,0 +1,7 @@
+# .gitignore
+
+
+# PyCharm
+
+.idea/
+__pycache__/
