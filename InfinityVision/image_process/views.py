@@ -2,7 +2,6 @@ import numpy as np
 import tensorflow as tf
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView
 
 from .forms import FileFieldForm
 from .models import IMAGE
@@ -59,11 +58,13 @@ def upload_image(request):
 
             for file in files:
                 image_document = IMAGE(file=file, user=request.user, original_name=file.name)
-                image_document.save()
-                image_documents.append(image_document)
 
                 try:
                     predicted_class = classify_image(file)
+                    image_document.predicted_class = predicted_class
+                    image_document.save()
+
+                    image_documents.append(image_document)
                     predictions.append(predicted_class)
                 except ValueError as e:
                     return render(request, 'image_process/upload_image.html', {'form': form, 'error': str(e)})

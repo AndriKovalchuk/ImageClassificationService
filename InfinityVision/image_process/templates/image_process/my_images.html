@@ -138,7 +138,12 @@
                 <div class="card">
                     <div class="card-body">
                         <img src="{{ image.file.url }}" alt="{{ image.original_name }}">
-                        <h3 class="card-text">{{ image.original_name }}</h3>
+                        <div>
+                            <h3 class="card-text">Image name: {{ image.original_name }}</h3>
+                            {% if image.predicted_class %}
+                            <h3 class="card-text">Predicted class: {{ image.predicted_class }}</h3>
+                            {% endif %}
+                        </div>
                         <div class="buttons">
                             <a href="{{ image.file.url }}" target="_blank" class="view-image">View Image</a>
                             <a href="{% url 'image_process:classify_image' image.id %}" class="classify-image">Classify Image</a>
