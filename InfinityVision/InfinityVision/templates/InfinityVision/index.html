@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>InfinityVision</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Load Static Files -->
+    {% load static %}
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="{% static 'img/logo.png' %}" alt=""> -->
+            <i class="bi bi-eye"></i>
+            <h1 class="sitename">InfinityVision</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/" class="active">Home<br></a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="about.html">Gallery</a></li>
+                <li class="dropdown"><a href="gallery.html"><span>My Profile</span> <i
+                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="gallery.html">Edit Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="#" class="gitgub"><i class="bi bi-github"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+
+    </div>
+</header>
+
+<main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <h2><span>I'm </span><span class="">InfinityVision</span> a Professional<span> a professional assistant in recognizing your images from Ukraine</span>
+                    </h2>
+                    <p>In omni insolito, quod ad latus recedit, tantum inusitatum visus angulus evadit.</p>
+                    <a href="{% url 'users:signup' %}" class="btn-get-started">Get started now<br></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="gallery" class="gallery section">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/gallery/gallery-8-2.jpg' %}" class="d-block w-100" alt="Gallery 8">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/gallery/gallery-7.jpg' %}" class="d-block w-100" alt="Gallery 7">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/gallery/gallery-4.jpg' %}" class="d-block w-100" alt="Gallery 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer id="footer" class="footer">
+
+    <div class="container">
+        <div class="copyright text-center ">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>
+                <span>All Rights Reserved</span></p>
+        </div>
+        <div class="social-links d-flex justify-content-center">
+            <a href=""><i class="bi bi-github"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+        <div class="credits">
+            Designed by <a href="">InfinityTeam</a>
+        </div>
+    </div>
+
+</footer>
+
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader">
+    <div class="line"></div>
+</div>
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

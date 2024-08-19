@@ -1,0 +1,115 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Edit Image Name</h1>
+    <div class="card">
+        <div class="card-body">
+            <style>
+                .container {
+                    max-width: 600px;
+                    margin: 50px auto;
+                    padding: 20px;
+                }
+                .card {
+                    background: #ffffff;
+                    border-radius: 16px;
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+                    border: none;
+                    overflow: hidden;
+                    padding: 20px;
+                }
+                .card-body {
+                    padding: 20px;
+                    text-align: center;
+                }
+                .card-body h1 {
+                    font-size: 2em;
+                    color: #333;
+                    margin-bottom: 20px;
+                    font-weight: 600;
+                }
+                .form-group {
+                    margin-bottom: 20px;
+                    text-align: left;
+                }
+                .form-group label {
+                    display: block;
+                    margin-bottom: 8px;
+                    font-size: 16px;
+                    color: #333;
+                    font-weight: 500;
+                }
+                .form-group input {
+                    width: 100%;
+                    padding: 12px;
+                    font-size: 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    background-color: #fafafa;
+                    transition: border-color 0.3s, box-shadow 0.3s;
+                }
+                .form-group input:focus {
+                    border-color: #007bff;
+                    outline: none;
+                    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+                }
+                .btn {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    padding: 14px 24px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    transition: background-color 0.3s, transform 0.3s;
+                    margin: 10px;
+                }
+                .btn:hover {
+                    background-color: #0056b3;
+                    transform: scale(1.05);
+                }
+                .btn-cancel {
+                    background-color: #6c757d;
+                }
+                .btn-cancel:hover {
+                    background-color: #5a6268;
+                }
+                .btn-group {
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                }
+                @media (max-width: 600px) {
+                    .container {
+                        padding: 15px;
+                    }
+                    .card-body h1 {
+                        font-size: 1.6em;
+                    }
+                    .form-group input {
+                        padding: 10px;
+                    }
+                    .btn {
+                        padding: 12px 20px;
+                        font-size: 14px;
+                    }
+                }
+            </style>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_original_name">Image Name</label>
+                    {{ form.original_name }}
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn">Save Changes</button>
+                    <a href="{% url 'image_process:my_images' %}" class="btn btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

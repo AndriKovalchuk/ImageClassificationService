@@ -1,0 +1,90 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+<h1>Edit Image</h1>
+<div class="card">
+    <div class="card-body">
+        <style>
+            .responsive-img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            .card-body {
+                text-align: center;
+                padding: 20px;
+            }
+            .card-body h3 {
+                margin: 20px 0;
+                font-size: 1.5em;
+                color: #333;
+            }
+            .card-body p {
+                font-size: 1.2em;
+                color: #555;
+            }
+            .btn {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                transition: background-color 0.3s, transform 0.3s;
+                margin: 5px;
+            }
+            .btn:hover {
+                background-color: #0056b3;
+                transform: scale(1.05);
+            }
+            .btn-edit {
+                background-color: #ffc107;
+            }
+            .btn-edit:hover {
+                background-color: #e0a800;
+            }
+            .btn-delete {
+                background-color: #dc3545;
+            }
+            .btn-delete:hover {
+                background-color: #c82333;
+            }
+            .container {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+            @media (max-width: 600px) {
+                .container {
+                    padding: 15px;
+                }
+                .card-body h3 {
+                    font-size: 1.2em;
+                }
+                .card-body p {
+                    font-size: 1em;
+                }
+            }
+        </style>
+        <img src="{{ image.file.url }}" alt="{{ image.original_name }}" class="responsive-img">
+        <h3 class="card-text">{{ image.original_name }}</h3>
+        {% if predicted_class %}
+        <p>Predicted Class: <strong>{{ predicted_class }}</strong></p>
+        {% elif error %}
+        <p>Error: {{ error }}</p>
+        {% endif %}
+        <div class="button-group">
+            <a href="{% url 'image_process:edit_image_name' image.id %}" class="btn btn-edit">Edit Name</a>
+            <a href="{% url 'image_process:delete_image' image.id %}" class="btn btn-delete">Delete</a>
+        </div>
+        <a href="{% url 'image_process:my_images' %}" class="btn">Back to My Images</a>
+    </div>
+</div>
+{% endblock %}

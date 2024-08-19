@@ -1,5 +1,7 @@
 from django import forms
 
+from image_process.models import IMAGE
+
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
@@ -21,3 +23,9 @@ class MultipleFileField(forms.FileField):
 
 class FileFieldForm(forms.Form):
     file_field = MultipleFileField()
+
+
+class EditImageNameForm(forms.ModelForm):
+    class Meta:
+        model = IMAGE
+        fields = ['original_name']
