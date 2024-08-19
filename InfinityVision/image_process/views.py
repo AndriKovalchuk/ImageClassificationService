@@ -110,3 +110,24 @@ def classify_image_view(request, image_id):
             'image': image,
             'error': 'An error occurred during image processing'
         })
+
+
+from .forms import ImageForm
+
+def edit_image(request, pk):
+    image = get_object_or_404(ImageModel, pk=pk)
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES, instance=image)
+        if form.is_valid():
+            form.save()
+            return redirect('image_detail', pk=image.pk)
+    else:
+        form = ImageForm(instance=image)
+    return render(request, 'edit_image.html', {'form': form})
+
+def delete_image(request, pk):
+    image = get_object_or_404(ImageModel, pk=pk)
+    if request.method == 'POST':
+        image.delete()
+        return redirect('image_list')
+    return render(request, 'delete_image.html', {'image': image})
