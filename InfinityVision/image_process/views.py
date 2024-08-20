@@ -141,3 +141,7 @@ def edit_image_name(request, image_id):
         form = EditImageNameForm(instance=image)
 
     return render(request, 'image_process/edit_image_name.html', {'form': form, 'image': image})
+
+@login_required
+def image_search_view(request):
+    pass
