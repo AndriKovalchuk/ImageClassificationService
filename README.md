@@ -2,13 +2,13 @@
   <img src="readme_img/logo.png" style="width: 400px;" alt="Logo">
 </div>
 
-# Вебзастосунок <span style="color:purple">InfinityVision</span> класифікує завантажені в нього зображення за допомогою Convolutional Neural Network.
+# Вебзастосунок *InfinityVision*, розроблений командою *Infinity*, класифікує завантажені в нього зображення за допомогою *Convolutional Neural Network*.
 # Розроблений на базі фреймворку [Django](https://www.djangoproject.com/)
-# Використовується модель "model_2_finetuned.h5".
+# Модель "model_3_finetuned.h5", що класифікує зображення, натренована на датасеті [CIFAR-10](https://www.kaggle.com/c/cifar-10).
 
-## Model_2_finetuned
+## Model_3_finetuned
 
-В моделі "model_2_finetuned.h5" використаний підхід донавчання (Fine-tuning) на попередньо навченій моделі "model_2_vgg16.h5":
+В моделі "model_3_finetuned.h5" використаний підхід донавчання (Fine-tuning) на попередньо навченій моделі "model_3_vgg16.h5":
 
 <div style="text-align: left;">
   <img src="readme_img/acc_compare.png" style="width: 900px;" alt="Acc_Compare">
@@ -22,7 +22,7 @@
 
 ![accurasy_finetuned.png](readme_img/accurasy_finetuned.png)
 
-### Історія тренування "model_2_finetuned.h5":
+### Історія тренування "model_3_finetuned.h5":
 
 <div style="text-align: left;">
   <img src="readme_img/acc_loss_finetuned.png" style="width: 900px;" alt="Acc_Loss_finetuned">
@@ -35,20 +35,13 @@
 </div>
 
 
-## Model_2_vgg16
-
-Основна модель "model_2_vgg16"
+## Основна модель Model_3_vgg16
 
 ### Гіперпараметри:
-* img_size: Встановлює розмір зображень у 56x56 пікселів. CIFAR-10 спочатку має розмір зображень 32x32, тому вони збільшуються до 56x56.
+* img_size: Встановлює розмір зображень у 128x128 пікселів.
 * num_classes: Кількість класів для класифікації (10 класів у CIFAR-10).
-* batch_size: Розмір батчу під час навчання (128).
-* epochs: Кількість епох для навчання (10).
-
-![GP.png](readme_img/GP.png)
-
-### Гіперпараметри для аугментації зображень:
-* rotation_range, width_shift_range, height_shift_range, shear_range, zoom_range, horizontal_flip, fill_mode
+* batch_size: Розмір батчу під час навчання (512).
+* epochs: Кількість епох для навчання (5).
 
 ### Створення базової моделі VGG16:
 * VGG16: Використовується попередньо навчена модель VGG16 (без верхніх шарів), яка завантажує попередньо навчені ваги з ImageNet.
