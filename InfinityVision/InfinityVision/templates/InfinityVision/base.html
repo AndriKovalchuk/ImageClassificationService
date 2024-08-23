@@ -28,9 +28,36 @@
     <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
-    <!-- Main CSS File -->
+    <!-- Main CSS Files -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/reg.css' %}" rel="stylesheet">
+    <link href="{% static 'css/pasres.css' %}" rel="stylesheet">
+    <link href="{% static 'css/center.css' %}" rel="stylesheet">
 
+    <style>
+        /* Flexbox setup to push footer to the bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            flex: 1;
+            padding-bottom: 60px; /* Footer height */
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e5e5e5;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="{% block body_class %}index-page{% endblock %}">
@@ -45,25 +72,29 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Gallery</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% if user.is_authenticated %}{% url 'image_process:my_images' %}{% else %}{% url 'users:signin' %}{% endif %}">Gallery</a>
+                </li>
 
-                <li class="dropdown"><a href=""><span>My Profile</span> <i
-                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <li class="dropdown">
+                    <a href="#"><span>My Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
-                        <li><a href="">Edit Profile</a></li>
-                        <li><a href="">Logout</a></li>
+                        <li><a href="{% url 'users:edit_user' user.id %}">Edit Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
                     </ul>
                 </li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact</a></li>
+                {% endif %}
+                <li><a href="{% url 'facts' %}">Fun facts</a></li>
+                <li><a href="/">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <div class="header-social-links">
-            <a href="#" class="gitgub"><i class="bi bi-github"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
 
     </div>
@@ -77,16 +108,16 @@
 
 <footer id="footer" class="footer">
     <div class="container">
-        <div class="copyright text-center ">
+        <div class="copyright text-center">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>
                 <span>All Rights Reserved</span></p>
         </div>
         <div class="social-links d-flex justify-content-center">
-            <a href=""><i class="bi bi-github"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
         <div class="credits">
-            Designed by <a href="">InfinityTeam</a>
+            Designed by <a href="#">InfinityTeam</a>
         </div>
     </div>
 </footer>

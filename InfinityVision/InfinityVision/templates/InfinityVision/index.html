@@ -48,8 +48,9 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="/" class="active">Home<br></a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="about.html">Gallery</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% if user.is_authenticated %}{% url 'image_process:my_images' %}{% else %}{% url 'users:signin' %}{% endif %}">Gallery</a></li>
                 <li class="dropdown"><a href="gallery.html"><span>My Profile</span> <i
                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
@@ -58,15 +59,16 @@
 
                     </ul>
                 </li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                {% endif %}
+                <li><a href="{% url 'facts' %}">Fun facts</a></li>
+                <li><a href="/">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <div class="header-social-links">
-            <a href="#" class="gitgub"><i class="bi bi-github"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
 
     </div>
@@ -77,18 +79,17 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section">
 
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <h2><span>I'm </span><span class="">InfinityVision</span> a Professional<span> a professional assistant in recognizing your images from Ukraine</span>
-                    </h2>
-                    <p>In omni insolito, quod ad latus recedit, tantum inusitatum visus angulus evadit.</p>
-                    <a href="{% url 'users:signup' %}" class="btn-get-started">Get started now<br></a>
-                </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                <h2><span>Discover the Future of Image Recognition with </span><span class="">InfinityVision</span>!</h2>
+                <p>Transform your images into insights with just a click! Upload your photos and watch as InfinityVision’s cutting-edge technology brings clarity and detail to your visuals like never before.</p>
+                <a href="{% url 'users:signup' %}" class="btn-get-started">Dive In and Explore Now!<br></a>
             </div>
         </div>
+    </div>
 
-    </section>
+</section>
 
 
     <section id="gallery" class="gallery section">
@@ -117,8 +118,8 @@
                 <span>All Rights Reserved</span></p>
         </div>
         <div class="social-links d-flex justify-content-center">
-            <a href=""><i class="bi bi-github"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
         <div class="credits">
             Designed by <a href="">InfinityTeam</a>

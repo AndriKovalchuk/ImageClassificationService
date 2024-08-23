@@ -1,152 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>InfinityVision</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <!-- Load Static Files -->
-    {% load static %}
-
-    <!-- Favicons -->
-    <link href="{% static 'img/favicon.png' %}" rel="icon">
-    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-    <!-- Main CSS File -->
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
-
-</head>
-
-<body class="index-page">
-
-<header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-
-        <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="{% static 'img/logo.png' %}" alt=""> -->
-            <i class="bi bi-eye"></i>
-            <h1 class="sitename">InfinityVision</h1>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="/" class="active">Home<br></a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="about.html">Gallery</a></li>
-                <li class="dropdown"><a href="gallery.html"><span>My Profile</span> <i
-                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="gallery.html">Edit Profile</a></li>
-                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
-
-                    </ul>
-                </li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-        <div class="header-social-links">
-            <a href="#" class="gitgub"><i class="bi bi-github"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-
-    </div>
-</header>
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
 
 <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="hero" class="hero section" style="background-color: #000; padding: 40px 0;">
 
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="font-size: 1.5rem; line-height: 1.8; text-align: justify;">
-                        Вебзастосунок InfinityVision класифікує завантажені в нього зображення за допомогою Convolutional Neural Network.
+
+                    <h3 style="
+                        font-family: 'Roboto', sans-serif;
+                        color: #fff;
+                        font-size: 1.2rem;
+                        line-height: 1.6;
+                        text-align: justify;
+                        padding: 20px;
+                    ">
+                        Вебзастосунок InfinityVision класифікує завантажені в нього зображення за допомогою
+                        Convolutional Neural Network.
                         Застосунок розроблений на базі фреймворку Django.
                         Модель, що класифікує зображення, натренована на датасеті CIFAR-10.
                         Як згорткову основу використано VGG-16.
                         Загалом було натреновано дві успішні за точністю моделі.
-                        Перша модель мала розмір 56х56 пікселів, тренувалась 10 епох і мала точність 92%, але після донавчання на 5 епохах досягла точності 94%.
+                        Перша модель мала розмір 56х56 пікселів, тренувалась 10 епох і мала точність 92%, але після
+                        донавчання на 5 епохах досягла точності 94%.
                         Після аналізу і тестування моделі було вирішено збільшити розмір зображень до 128х128 пікселів.
                         Отже, друга модель мала розмір 128х128 пікселів, тренувалась 5 епох і мала точність 92%.
                         Для другої моделі також застосували донавчання на 10 епохах, і точність зросла до 93%.
-                        Хоча точність другої моделі була на 1% нижчою за попередню, вона краще класифікувала зображення, які не входили до датасету.
-                        За результатами тестування було вирішено використовувати в застосунку модель, натреновану на зображеннях розміром 128х128 пікселів.
+                        Хоча точність другої моделі була на 1% нижчою за попередню, вона краще класифікувала зображення,
+                        які не входили до датасету.
+                        За результатами тестування було вирішено використовувати в застосунку модель, натреновану на
+                        зображеннях розміром 128х128 пікселів.
                     </h3>
-                    <h4 style="font-size: 1.5rem; line-height: 1.8; text-align: justify;">
-                        The InfinityVision web application classifies images uploaded to it using a Convolutional Neural Network.
+                    <h4 style="
+                        font-family: 'Roboto', sans-serif;
+                        color: #fff;
+                        font-size: 1.2rem;
+                        line-height: 1.6;
+                        text-align: justify;
+                        padding: 20px;
+                    ">
+                        The InfinityVision web application classifies images uploaded to it using a Convolutional Neural
+                        Network.
                         The application is developed based on the Django framework.
-                        The model that classifies images was trained on the CIFAR-10 dataset, with VGG-16 used as the convolutional base.
+                        The model that classifies images was trained on the CIFAR-10 dataset, with VGG-16 used as the
+                        convolutional base.
                         In total, two models were successfully trained in terms of accuracy.
-                        The first model had a size of 56x56 pixels, was trained for 10 epochs, and achieved an accuracy of 92%, but after applying additional training for 5 more epochs, it reached an accuracy of 94%.
-                        After analyzing and testing the model, it was decided to increase the image size to 128x128 pixels.
-                        Therefore, the second model had a size of 128x128 pixels, was trained for 5 epochs, and achieved an accuracy of 92%.
-                        Additional training for 10 epochs was also applied to the second model, raising the accuracy to 93%.
-                        Although the accuracy of the second model was 1% lower than the previous one, it performed better at classifying images that were not part of the dataset.
-                        Based on the test results, it was decided to use the model trained on images with a size of 128x128 pixels in the application.
+                        The first model had a size of 56x56 pixels, was trained for 10 epochs, and achieved an accuracy
+                        of 92%, but after applying additional training for 5 more epochs, it reached an accuracy of 94%.
+                        After analyzing and testing the model, it was decided to increase the image size to 128x128
+                        pixels.
+                        Therefore, the second model had a size of 128x128 pixels, was trained for 5 epochs, and achieved
+                        an accuracy of 92%.
+                        Additional training for 10 epochs was also applied to the second model, raising the accuracy to
+                        93%.
+                        Although the accuracy of the second model was 1% lower than the previous one, it performed
+                        better at classifying images that were not part of the dataset.
+                        Based on the test results, it was decided to use the model trained on images with a size of
+                        128x128 pixels in the application.
                     </h4>
                 </div>
             </div>
         </div>
 
     </section>
-
 </main>
 
-<footer id="footer" class="footer">
-
-    <div class="container">
-        <div class="copyright text-center ">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>
-                <span>All Rights Reserved</span></p>
-        </div>
-        <div class="social-links d-flex justify-content-center">
-            <a href=""><i class="bi bi-github"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-        </div>
-        <div class="credits">
-            Designed by <a href="">InfinityTeam</a>
-        </div>
-    </div>
-
-</footer>
-
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
-
-<div id="preloader">
-    <div class="line"></div>
-</div>
-
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
-<script src="{% static 'vendor/aos/aos.js' %}"></script>
-<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
-<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-
-<!-- Main JS File -->
-<script src="{% static 'js/main.js' %}"></script>
-
-</body>
-
-</html>
+{% endblock %}

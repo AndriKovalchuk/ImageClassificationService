@@ -17,7 +17,7 @@ class RegisterView(View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(to="image_process:my_pdfs")
+            return redirect(to="image_process:my_images")
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):

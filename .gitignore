@@ -1,7 +1,17 @@
-# .gitignore
-
-
-# PyCharm
-
-.idea/
 __pycache__/
+.idea/
+media/
+*.py[cod]
+*.so
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+*.env
+*.pgsql
+*.pgadmin
+*.dump
+*.backup
+*.iml
+*.pyd

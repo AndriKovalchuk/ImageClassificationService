@@ -6,13 +6,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import FileFieldForm, EditImageNameForm
 from .models import IMAGE
 
-MODEL_PATH = 'models/model_2_finetuned.h5'
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, 'models', 'model_3_finetuned.h5')
 model = tf.keras.models.load_model(MODEL_PATH)
 model.summary()
 
 CLASS_LABELS = [
     'airplane', 'automobile', 'bird', 'cat', 'deer',
-    'dog', 'frog', 'horse', 'ship', 'truck'
+        'dog', 'frog', 'horse', 'ship', 'truck'
 ]
 
 
@@ -72,7 +74,7 @@ def preprocess_image(image):
 
     image = tf.image.decode_image(image_content, channels=3)
 
-    image = tf.image.resize(image, [56, 56])
+    image = tf.image.resize(image, [128, 128])
 
     image = image / 255.0
     image = tf.expand_dims(image, axis=0)

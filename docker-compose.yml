@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    container_name: POSTGRES_DB_Infinity_Vision
+    environment:
+      POSTGRES_DB: InfinityVisionDB
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    container_name: WEB_Infinity_Vision
+    command: ["conda", "run", "--no-capture-output", "-n", "InfinityVision", "gunicorn", "InfinityVision.wsgi:application", "--bind", "0.0.0.0:8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

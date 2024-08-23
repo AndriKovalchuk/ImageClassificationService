@@ -7,26 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Images</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f4f9;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
         }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        body {
+            display: flex;
+            flex-direction: column;
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #fafafa;
             margin-bottom: 30px;
             font-size: 2.5em;
             font-weight: 600;
+        }
+        .content {
+            flex: 1;
         }
         .search-form {
             display: flex;
@@ -35,7 +35,7 @@
         }
         .search-form form {
             display: flex;
-            width: 100%;
+            width: 70%;
         }
         .search-form input[type="text"] {
             padding: 14px 20px;
@@ -49,10 +49,10 @@
         .search-form input[type="text"]:focus {
             outline: none;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            border-color: #007bff;
+            border-color: #27a776;
         }
         .search-form button {
-            background: #007bff;
+            background: #27a776;
             border: none;
             border-radius: 8px;
             padding: 12px 20px;
@@ -60,13 +60,15 @@
             color: #fff;
             font-size: 16px;
             transition: background 0.3s ease, transform 0.3s ease;
+            margin-left: 30px;
+            width: 100px;
         }
         .search-form button:hover {
-            background: #138496;
+            background: #059652;
             transform: scale(1.05);
         }
         .card {
-            background: #f9f9f9;
+            background: #000;
             border: 1px solid #ddd;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -87,7 +89,7 @@
         .card-body h3 {
             margin: 0;
             font-size: 18px;
-            color: #333;
+            color: #d7d7d784;
             font-weight: 400;
         }
         .card-body img {
@@ -108,23 +110,23 @@
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
         .card-body a.view-image {
-            background-color: #28a745;
+            background-color: #27a776;
             color: #fff;
         }
         .card-body a.view-image:hover {
-            background-color: #218838;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .card-body a.classify-image {
-            background-color: #17a2b8;
+            background-color: #27a776;
             color: #fff;
         }
         .card-body a.classify-image:hover {
-            background-color: #138496;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .btn {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
             border: none;
             padding: 12px 20px;
@@ -138,7 +140,7 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
         }
         @media (max-width: 600px) {
@@ -155,44 +157,74 @@
                 justify-content: space-between;
             }
         }
+        .center-btn {
+            display: inline-block;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .btn {
+            margin-bottom: 50px;
+        }
+        footer {
+            background-color: #222;
+            color: #fafafa;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-<h1>My Images</h1>
+<div class="content">
+    <h1>My Images</h1>
 
-<div class="search-form">
-    <form method="GET" action="">
-        <input type="text" name="search" placeholder="Search images..." value="{{ search_query }}">
-        <button type="submit">Search</button>
-    </form>
-</div>
+    <!-- Search Form -->
+    <div class="search-form">
+        <form method="GET" action="">
+            <input type="text" name="search" placeholder="Search images..." value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
 
-{% if images %}
-<div class="container">
-    {% for image in images %}
-    <div class="card">
-        <div class="card-body">
-            <img src="{{ image.file.url }}" alt="{{ image.original_name }}">
-            <div>
-                <h3 class="card-text">Image name: {{ image.original_name }}</h3>
-                {% if image.predicted_class %}
-                <h3 class="card-text">Predicted class: {{ image.predicted_class }}</h3>
-                {% endif %}
-            </div>
-            <div class="buttons">
-                <a href="{{ image.file.url }}" target="_blank" class="view-image">View Image</a>
-                <a href="{% url 'image_process:classify_image' image.id %}" class="classify-image">Edit Image</a>
+    <!-- Uploaded Images -->
+    {% if images %}
+    <div class="container">
+        {% for image in images %}
+        <div class="card">
+            <div class="card-body">
+                <img src="{{ image.file.url }}" alt="{{ image.original_name }}">
+                <div>
+                    <h3 class="card-text">Image name: {{ image.original_name }}</h3>
+                    {% if image.predicted_class %}
+                    <h3 class="card-text">Predicted class: {{ image.predicted_class }}</h3>
+                    {% endif %}
+                </div>
+                <div class="buttons">
+                    <a href="{{ image.file.url }}" target="_blank" class="view-image">View Image</a>
+                    <a href="{% url 'image_process:classify_image' image.id %}" class="classify-image">Edit Image</a>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    {% else %}
+    <div class="container1">
+        <p>No images found.</p>
+    </div>
+    {% endif %}
+
+    <!-- Upload New Image Button -->
+    <div class="container1">
+        <a href="{% url 'image_process:upload_image' %}" class="btn">Upload New Image</a>
+    </div>
 </div>
-{% else %}
-<div class="container">
-    <p>No images found.</p>
-</div>
-{% endif %}
-<a href="{% url 'image_process:upload_image' %}" class="btn">Upload New Image</a>
-</body>
-</html>
+
 {% endblock %}

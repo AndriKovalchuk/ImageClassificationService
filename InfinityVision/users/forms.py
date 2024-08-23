@@ -12,11 +12,17 @@ class RegistrationForm(UserCreationForm):
     email = EmailField(max_length=254, required=True,
                        widget=EmailInput(attrs={"class": "form-control"}))
 
-    password1 = CharField(required=True,
-                          widget=PasswordInput(attrs={"class": "form-control"}))
+    password1 = CharField(
+        label="Password",
+        required=True,
+        widget=PasswordInput(attrs={"class": "form-control"})
+    )
 
-    password2 = CharField(required=True,
-                          widget=PasswordInput(attrs={"class": "form-control"}))
+    password2 = CharField(
+        label="Confirm Password",
+        required=True,
+        widget=PasswordInput(attrs={"class": "form-control"})
+    )
 
     class Meta:
         model = User
