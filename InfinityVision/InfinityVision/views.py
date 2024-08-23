@@ -7,3 +7,7 @@ def index(request):
 
 def about(request):
     return render(request, 'InfinityVision/about.html')
+
+
+def facts(request):
+    return render(request, 'InfinityVision/facts.html')

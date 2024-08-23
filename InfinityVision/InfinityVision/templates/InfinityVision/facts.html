@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>InfinityVision</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Load Static Files -->
+    {% load static %}
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="{% static 'img/logo.png' %}" alt=""> -->
+            <i class="bi bi-eye"></i>
+            <h1 class="sitename">InfinityVision</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/" class="active">Home<br></a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="about.html">Gallery</a></li>
+                <li class="dropdown"><a href="gallery.html"><span>My Profile</span> <i
+                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="gallery.html">Edit Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="#" class="gitgub"><i class="bi bi-github"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+
+    </div>
+</header>
+
+<main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="font-size: 1.5rem; line-height: 1.8; text-align: justify;">
+
+                        <strong style="color: #64C896;">Airplanes:</strong><br>
+                        - Jet Aircraft: The fastest commercial airplane was the "Concorde," which could fly at speeds of up to 2,179 km/h. This allowed it to cross the Atlantic in about 3 hours.<br>
+                        - Wing Span: The modern airplane with the longest wing span is the Antonov An-225 "Mriya" cargo plane. Its wingspan is 88.4 meters.<br>
+                        - Record Altitude: The Lockheed SR-71 Blackbird spy plane reached an altitude of over 25,929 meters, which is one of the records among aircraft.<br>
+                        - Flight Duration: The commercial flight by Singapore Airlines from New York to Singapore takes about 18 hours and is one of the longest in the world.<br>
+                        - Autopilot: Modern airplanes can fly on autopilot for up to 90% of the flight time. This includes takeoff and landing, although pilots always monitor these processes.<br>
+                        <strong style="color: #64C896;">Automobiles:</strong><br>
+                        - The First Car: In 1886, Karl Benz created the first car in history with an internal combustion engine, known as the Benz Patent-Motorwagen.<br>
+                        - The Largest Car Manufacturer: Toyota is the world's largest car manufacturer, producing millions of vehicles every year.<br>
+                        - Average Speed of the First Car: The first Benz Patent-Motorwagen had a maximum speed of only about 16 km/h (10 mph).<br>
+                        - The Fastest Production Car: The Bugatti Chiron Super Sport 300+ became the first production car to reach a speed of over 300 miles per hour (482 km/h).<br>
+                        - The Most Popular Car in the World: The Toyota Corolla is the best-selling car of all time, with over 44 million units sold.<br>
+                        <strong style="color: #64C896;">Birds:</strong><br>
+                        - Flight Speed: The peregrine falcon is the fastest bird in the world. During hunting, it can reach speeds of up to 390 km/h (242 mph).<br>
+                        - Migration: The Arctic tern holds the record for migration among birds. It flies approximately 70,000 km (43,500 miles) per year from the Arctic to Antarctica and back.<br>
+                        - Size: The bee hummingbird is the smallest bird in the world, weighing only 1.6-2 grams and measuring about 5-6 cm in length.<br>
+                        - Exceptional Vision: Eagles have such sharp vision that they can spot small prey from up to 3 km (2 miles) away.<br>
+                        - Cognitive Abilities: Ravens are among the most intelligent birds. They can solve complex tasks, use tools, and even remember human faces.<br>
+                        <strong style="color: #64C896;">Cats:</strong><br>
+                        - Sleep Masters: Cats can sleep up to 16-20 hours a day, which is about two-thirds of their life. This helps them conserve energy for active periods of hunting and playing.<br>
+                        - Purring Therapy: Cats' purring not only calms us but can also have a therapeutic effect for the cats themselves, reducing stress and speeding up the healing process.<br>
+                        - Unusual Vision: Cats see better than humans in the dark, but their vision is blurry when it comes to close objects. Their eyes are better adapted to detecting movement than focusing on details.<br>
+                        - Agile Hunters: Cats have special bones in their ears that help them maintain excellent balance, making them great hunters and acrobats.<br>
+                        - Tail Communication: The position of a cat's tail can say a lot about its mood. For example, a tail held high with a slight curve at the tip indicates friendliness and a willingness to interact.<br>
+                        <strong style="color: #64C896;">Deers:</strong><br>
+                        - Wide Distribution: Deer are found in almost every part of the world except Antarctica and Australia. They inhabit a wide range of environments, from forests and grasslands to mountains and wetlands.<br>
+                        - Antlers: Only male deer (and female reindeer) grow antlers, which they shed and regrow annually. Antlers are used for fighting during mating season to establish dominance.<br>
+                        - Varied Diet: Deer are herbivores and primarily feed on leaves, grass, and twigs. Some species, like the white-tailed deer, have a diverse diet that includes fruits, nuts, and fungi.<br>
+                        - Camouflage: Many deer species have a coat that helps them blend into their environment. Fawns are often born with spots that provide camouflage in dappled sunlight.<br>
+                        - Excellent Swimmers: Deer are surprisingly good swimmers. They can cross rivers and lakes to escape predators or to find food and mates.<br>
+                        <strong style="color: #64C896;">Dogs:</strong><br>
+                        - Ancient Origins: Dogs are believed to have been domesticated between 20,000 to 40,000 years ago, making them one of the first animals to be domesticated by humans.<br>
+                        - Sense of Smell: Dogs have an incredible sense of smell, with up to 300 million olfactory receptors in their noses, compared to about 6 million in humans. This makes their sense of smell 40 times better than ours.<br>
+                        - Intelligence: Dogs are incredibly intelligent and can understand up to 250 words and gestures. Some breeds, like Border Collies, are known for their exceptional problem-solving skills.<br>
+                        - Variety of Breeds: There are over 340 recognized dog breeds worldwide, each with its own unique characteristics and history. The American Kennel Club currently recognizes 197 breeds.<br>
+                        - Tail Communication: Dogs use a variety of vocalizations and body language to communicate. They can bark, growl, whine, and use their tails, ears, and eyes to convey emotions.<br>
+                        <strong style="color: #64C896;">Frogs:</strong><br>
+                        - Diverse Species: There are over 7,000 known species of frogs, making them one of the most diverse groups of animals on the planet. They are found on every continent except Antarctica.<br>
+                        - Unique Breathing: Frogs can breathe through their skin as well as their lungs. Their skin must stay moist for them to absorb oxygen, which is why they are often found near water.<br>
+                        - Powerful Jumpers: Frogs are known for their incredible jumping abilities. Some species can leap over 20 times their body length in a single bound, thanks to their powerful hind legs.<br>
+                        - Metamorphosis: Frogs undergo a fascinating life cycle, starting as eggs, then hatching into tadpoles, which are aquatic and have gills. As they mature, they develop lungs, legs, and eventually become adult frogs.<br>
+                        - Vocal Communication: Male frogs are known for their croaking, which is used to attract mates and establish territory. Each species has its own unique call, and some can be heard from miles away.<br>
+                        <strong style="color: #64C896;">Horses:</strong><br>
+                        - Ancient History: Horses have been domesticated for over 5,000 years, originally used for transportation, agriculture, and warfare.<br>
+                        - Incredible Speed: The fastest recorded sprinting speed of a horse is 55 mph (88.5 km/h), achieved by a horse named Winning Brew in 2008.<br>
+                        - Height Measurement: Horses are measured in "hands," with one hand equaling 4 inches (10.16 cm). The tallest horse ever recorded was a Belgian draft horse named Big Jake, standing 20.2 hands (82.75 inches, or 210.19 cm).<br>
+                        - Variety of Breeds: There are over 300 different horse breeds worldwide, ranging from tiny ponies like the Shetland to massive draft horses like the Shire.<br>
+                        - Unique Digestive System: Horses have a one-way digestive system, meaning they cannot vomit. This makes colic, a form of abdominal pain, a potentially serious condition for them.<br>
+                        <strong style="color: #64C896;">Ships:</strong><br>
+                        - Ancient Origins: The earliest known ships date back to around 4000 BCE. The ancient Egyptians built ships out of papyrus reeds to navigate the Nile River.<br>
+                        - Titanic's Speed: The RMS Titanic, one of the most famous ships in history, had a top speed of 24 knots (about 28 mph or 45 km/h), which was impressive for its time.<br>
+                        - Suez Canal's Impact: The opening of the Suez Canal in 1869 revolutionized global trade by significantly reducing the sea route distance between Europe and South Asia, avoiding the need to go around the southern tip of Africa.<br>
+                        - World’s Largest Ship: As of 2024, the largest ship in the world is the "Wonder of the Seas," a cruise ship that measures 1,188 feet (362 meters) in length and can carry over 9,000 people, including passengers and crew.<br>
+                        - Ship Classification: Ships are classified into various types, such as cargo ships, tankers, passenger ships, and warships. Each type is designed for specific functions like transporting goods, carrying passengers, or engaging in naval warfare.<br>
+                        <strong style="color: #64C896;">Trucks:</strong><br>
+                        - First Truck: The first truck was invented by Gottlieb Daimler in 1896. It was a horse-drawn cart fitted with an engine and is considered the precursor to modern trucks.<br>
+                        - Electric Trucks: With the push towards sustainability, companies like Tesla and Rivian are developing electric trucks that aim to reduce emissions and dependency on fossil fuels.<br>
+                        - Truck Mileage: In the United States, commercial trucks drive over 300 billion miles each year, highlighting their crucial role in the economy.<br>
+                        - Trucks and Fuel Efficiency: Modern trucks are becoming increasingly fuel-efficient due to advancements in technology, with some long-haul trucks achieving over 10 miles per gallon.<br>
+                        - Truck Longevity: Semi-trucks are built to last. It's not uncommon for them to cover over a million miles during their lifetime with proper maintenance.<br>
+
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer id="footer" class="footer">
+
+    <div class="container">
+        <div class="copyright text-center ">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>
+                <span>All Rights Reserved</span></p>
+        </div>
+        <div class="social-links d-flex justify-content-center">
+            <a href=""><i class="bi bi-github"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+        <div class="credits">
+            Designed by <a href="">InfinityTeam</a>
+        </div>
+    </div>
+
+</footer>
+
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader">
+    <div class="line"></div>
+</div>
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
