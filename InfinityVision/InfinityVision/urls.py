@@ -12,6 +12,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('image_process/', include('image_process.urls')),
     path('users/', include('users.urls')),
+    path('about/', views.about, name='about'),
 ]
 
 if settings.DEBUG:
