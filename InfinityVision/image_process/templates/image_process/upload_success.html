@@ -5,26 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <br>
+    <br>
     <title>Upload Success</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #060606;
             margin: 0;
             padding: 0;
             text-align: center;
         }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            border: 1px solid #ddd;
-        }
-        h1 {
-            color: #333;
+        h2 {
+            color: #fafafa;
             margin-bottom: 20px;
             font-size: 2.5em;
             font-weight: bold;
@@ -32,11 +25,11 @@
         }
         p {
             font-size: 18px;
-            color: #444;
+            color: #fafafa50;
             margin-bottom: 20px;
         }
         .btn {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
             border: none;
             padding: 14px 24px;
@@ -49,16 +42,34 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-<h1>Upload Successful!</h1>
+<h2>Upload Successful!</h2>
 <p>Your images have been uploaded and processed successfully.</p>
+<br>
+<br>
+<br>
 <a href="{% url 'image_process:my_images' %}" class="btn">Back to My Images</a>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 {% endblock %}

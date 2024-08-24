@@ -11,3 +11,7 @@ def about(request):
 
 def facts(request):
     return render(request, 'InfinityVision/facts.html')
+
+
+def contact(request):
+    return render(request, 'InfinityVision/contact.html')

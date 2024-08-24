@@ -1,0 +1,168 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fafafa;
+            margin-bottom: 20px;
+        }
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message .text {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+            word-break: break-word;
+            position: relative;
+        }
+        .message.user .text {
+            background: #28a745;
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: #fff;
+        }
+        .input-container textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+            font-size: 16px;
+            outline: none;
+        }
+        .input-container textarea:focus {
+            border-color: #007bff;
+        }
+        .input-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+        .query-history {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .query-history h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .query-history .query {
+            margin-bottom: 10px;
+        }
+        .query-history .query p {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0;
+            font-size: 16px;
+        }
+        .return-btn {
+            display: block;
+            margin: 20px auto;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .return-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat with AI</h1>
+    <div class="chat-box">
+        <div class="messages">
+            {% for query in queries %}
+            <div class="message {% if query.user == request.user %}user{% endif %}">
+                <div class="text">{{ query.answer|safe }}</div>
+            </div>
+            <div class="message {% if query.user != request.user %}user{% endif %}">
+                <div class="text">{{ query.question|safe }}</div>
+            </div>
+            {% empty %}
+            <p>No messages yet.</p>
+            {% endfor %}
+        </div>
+        <div class="input-container">
+            <form method="post" action="{% url 'chat' document.id %}">
+                {% csrf_token %}
+                <textarea name="question" rows="2" placeholder="Ask your question..."></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <div class="query-history">
+        <h2>Query History</h2>
+        {% for query in queries %}
+        <div class="query">
+            <p><strong>Question:</strong> {{ query.question }}</p>
+            <p><strong>Answer:</strong> {{ query.answer }}</p>
+        </div>
+        {% empty %}
+        <p>No query history available.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'pdf_process:my_pdfs' %}" class="return-btn">Return to My PDFs</a>
+</body>
+{% endblock %}

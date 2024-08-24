@@ -30,6 +30,10 @@
 
     <!-- Main CSS File -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/reg.css' %}" rel="stylesheet">
+    <link href="{% static 'css/pasres.css' %}" rel="stylesheet">
+    <link href="{% static 'css/center.css' %}" rel="stylesheet">
+
 
 </head>
 
@@ -50,24 +54,30 @@
                 <li><a href="/" class="active">Home<br></a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% if user.is_authenticated %}{% url 'image_process:my_images' %}{% else %}{% url 'users:signin' %}{% endif %}">Gallery</a></li>
-                <li class="dropdown"><a href="gallery.html"><span>My Profile</span> <i
-                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <li>
+                    <a href="{% if user.is_authenticated %}{% url 'image_process:my_images' %}{% else %}{% url 'users:signin' %}{% endif %}">Gallery</a>
+                </li>
+                <li>
+                    <a href="{% if user.is_authenticated %}{% url 'pdf_process:my_pdfs' %}{% else %}{% url 'users:signin' %}{% endif %}">Documents</a>
+                </li>
+                <li class="dropdown">
+                    <a href="{% url 'users:user_view' user.username %}"><span>My Profile</span> <i
+                            class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
-                        <li><a href="gallery.html">Edit Profile</a></li>
+                        <li><a href="{% url 'users:edit_user' user.id %}">Edit Profile</a></li>
                         <li><a href="{% url 'users:logout' %}">Logout</a></li>
-
                     </ul>
                 </li>
                 {% endif %}
                 <li><a href="{% url 'facts' %}">Fun facts</a></li>
-                <li><a href="/">Contact</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <div class="header-social-links">
-            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub"
+               target="_blank"><i class="bi bi-github"></i></a>
             <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
 
@@ -79,17 +89,20 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section">
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
-                <h2><span>Discover the Future of Image Recognition with </span><span class="">InfinityVision</span>!</h2>
-                <p>Transform your images into insights with just a click! Upload your photos and watch as InfinityVision’s cutting-edge technology brings clarity and detail to your visuals like never before.</p>
-                <a href="{% url 'users:signup' %}" class="btn-get-started">Dive In and Explore Now!<br></a>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <h2><span>Discover the Future of Image Recognition with </span><span class="">InfinityVision</span>!
+                    </h2>
+                    <p>Transform your images into insights with just a click! Upload your photos and watch as
+                        InfinityVision’s cutting-edge technology brings clarity and detail to your visuals like never
+                        before.</p>
+                    <a href="{% url 'users:signup' %}" class="btn-get-started">Dive In and Explore Now!<br></a>
+                </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
 
     <section id="gallery" class="gallery section">
@@ -114,11 +127,13 @@
 
     <div class="container">
         <div class="copyright text-center ">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>
-                <span>All Rights Reserved</span></p>
+            <p>© 2024 <span>Copyright</span> <strong class="px-1 sitename">InfinityVision</strong>.
+                <span>All rights reserved.</span>
+            </p>
         </div>
         <div class="social-links d-flex justify-content-center">
-            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://github.com/AndriKovalchuk/ImageClassificationService/tree/master" class="gitgub"
+               target="_blank"><i class="bi bi-github"></i></a>
             <a href="https://www.linkedin.com" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         </div>
         <div class="credits">

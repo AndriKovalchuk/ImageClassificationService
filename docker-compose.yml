@@ -5,18 +5,18 @@ services:
     container_name: POSTGRES_DB_Infinity_Vision
     environment:
       POSTGRES_DB: InfinityVisionDB
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   web:
-    build: .
+    build: . # Image has to be built from Dockerfile located in this directory
     container_name: WEB_Infinity_Vision
-    command: ["conda", "run", "--no-capture-output", "-n", "InfinityVision", "gunicorn", "InfinityVision.wsgi:application", "--bind", "0.0.0.0:8000"]
-    volumes:
-      - .:/app
+    command: ["/app/InfinityVision/entrypoint.sh"]
+    volumes: # Mounting local directory with a directory inside container
+      - .:/app/InfinityVision
     ports:
       - "8000:8000"
     depends_on:

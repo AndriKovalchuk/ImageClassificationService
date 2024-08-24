@@ -1,9 +1,12 @@
 {% extends 'InfinityVision/base.html' %}
 {% block content %}
-<h1>Edit Image</h1>
+<h1 class="centered-heading"> Edit Image</h1>
 <div class="card">
     <div class="card-body">
         <style>
+            .centered-heading {
+                text-align: center;
+            }
             .responsive-img {
                 max-width: 100%;
                 height: auto;
@@ -17,15 +20,15 @@
             .card-body h3 {
                 margin: 20px 0;
                 font-size: 1.5em;
-                color: #333;
+                color: #d3d3d3;
             }
             .card-body p {
                 font-size: 1.2em;
-                color: #555;
+                color: #d3d3d3;
             }
             .btn {
-                background-color: #007bff;
-                color: #fff;
+                background-color: #27a776;
+                color: #f3f3f3;
                 border: none;
                 padding: 12px 20px;
                 border-radius: 8px;
@@ -38,7 +41,7 @@
                 margin: 5px;
             }
             .btn:hover {
-                background-color: #0056b3;
+                background-color: #059652;
                 transform: scale(1.05);
             }
             .btn-edit {
@@ -53,14 +56,7 @@
             .btn-delete:hover {
                 background-color: #c82333;
             }
-            .container {
-                max-width: 800px;
-                margin: 50px auto;
-                padding: 20px;
-                background: #fff;
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            }
+
             @media (max-width: 600px) {
                 .container {
                     padding: 15px;
@@ -86,5 +82,8 @@
         </div>
         <a href="{% url 'image_process:my_images' %}" class="btn">Back to My Images</a>
     </div>
+    <br>
+    <br>
+    <br>
 </div>
 {% endblock %}

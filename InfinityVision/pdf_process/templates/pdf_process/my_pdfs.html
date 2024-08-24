@@ -1,0 +1,142 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded PDF Documents</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        .card-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-body h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            font-weight: normal;
+        }
+        .card-body .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        .card-body a {
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+        .card-body a.view-pdf {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .card-body a.view-pdf:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .card-body a.ai-chat {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .card-body a.ai-chat:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .card-body {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .card-body .buttons {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>My PDFs</h1>
+{% if pdfs %}
+<div class="container">
+    {% for pdf in pdfs %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-text">{{ pdf.original_name }}</h3>
+            <div class="buttons">
+                <a href="{{ pdf.file.url }}" target="_blank" class="view-pdf">View PDF</a>
+                <a href="{% url 'chat' pdf.id %}" class="ai-chat">AI Chat</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="container">
+    <p>No PDFs uploaded yet.</p>
+</div>
+{% endif %}
+<a href="{% url 'pdf_process:upload_pdf' %}" class="btn">Upload New PDF</a>
+</body>
+{% endblock %}

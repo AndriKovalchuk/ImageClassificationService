@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #000000;
             margin: 0;
             padding: 0;
         }
@@ -16,13 +16,13 @@
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background: #fff;
+            background: #fafafa50;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .profile-container h1 {
-            color: #333;
+            color: #fafafa;
             margin-bottom: 20px;
             font-size: 2em;
             font-weight: bold;
@@ -36,7 +36,7 @@
         }
         .profile-container p {
             font-size: 16px;
-            color: #555;
+            color: #fafafa;
             margin-bottom: 20px;
         }
         .profile-container .btn {
@@ -49,27 +49,27 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .btn-edit {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
         }
         .btn-edit:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .btn-delete {
-            background-color: #dc3545;
+            background-color: #27a776;
             color: #fff;
         }
         .btn-delete:hover {
-            background-color: #c82333;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .btn-pdfs {
-            background-color: #28a745;
+            background-color: #27a776;
             color: #fff;
         }
         .btn-pdfs:hover {
-            background-color: #218838;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .btn-change-password {
@@ -83,12 +83,27 @@
     </style>
 </head>
 <body>
+    <br>
+    <br>
+    <br>
     <div class="profile-container">
+        <br>
         <h1>{{ user.username }}</h1>
         <p>Email: {{ user.email }}</p>
         <a href="{% url 'users:edit_user' user.username %}" class="btn btn-edit">Edit Profile</a>
+        <a href="#" class="btn btn-edit">Change Password</a>
         <a href="{% url 'users:delete_user' user.username %}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">Delete User Profile</a>
-        <a href="{% url 'image_process:my_images' %}" class="btn btn-pdfs">My Images</a>
+        <br>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </body>
 {% endblock %}

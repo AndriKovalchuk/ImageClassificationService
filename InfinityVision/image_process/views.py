@@ -1,21 +1,20 @@
+import os
+
 import numpy as np
 import tensorflow as tf
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from tensorflow.keras.preprocessing import image
 
 from .forms import FileFieldForm, EditImageNameForm
 from .models import IMAGE
 
-import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(BASE_DIR, 'models', 'model_3_finetuned.h5')
 model = tf.keras.models.load_model(MODEL_PATH)
 model.summary()
 
-CLASS_LABELS = [
-    'airplane', 'automobile', 'bird', 'cat', 'deer',
-        'dog', 'frog', 'horse', 'ship', 'truck'
-]
+class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 
 @login_required
@@ -28,20 +27,20 @@ def upload_image(request):
             predictions = []
 
             for file in files:
+                print(file)
                 image_document = IMAGE(file=file, user=request.user, original_name=file.name)
+                img = image.load_img(file.file, target_size=(128, 128))  # Змінюємо розмір на 56x56
+                img_array = image.img_to_array(img)
+                img_array = np.expand_dims(img_array, axis=0)  # Додаємо розмір для batch
+                img_array = img_array / 255.0  # Нормалізуємо значення пікселів
 
-                try:
-                    predicted_class = classify_image(file)
-                    image_document.predicted_class = predicted_class
-                    image_document.save()
+                predictions = model.predict(img_array)
 
-                    image_documents.append(image_document)
-                    predictions.append(predicted_class)
-                except ValueError as e:
-                    return render(request, 'image_process/upload_image.html', {'form': form, 'error': str(e)})
-                except Exception as e:
-                    return render(request, 'image_process/upload_image.html',
-                                  {'form': form, 'error': 'An error occurred during image processing'})
+                predicted_class = np.argmax(predictions[0])
+                predicted_class = class_names[predicted_class]
+                image_document.predicted_class = predicted_class
+                image_document.save()
+                image_documents.append(image_document)
 
             return render(request, 'image_process/upload_success.html', {
                 'images': zip(image_documents, predictions)
@@ -49,37 +48,6 @@ def upload_image(request):
     else:
         form = FileFieldForm()
     return render(request, 'image_process/upload_image.html', {'form': form})
-
-
-def classify_image(image):
-    try:
-        preprocessed_image = preprocess_image(image)
-
-        predictions = model.predict(preprocessed_image)
-
-        if predictions.size == 0:
-            raise ValueError("No predictions were made.")
-
-        predicted_class = CLASS_LABELS[np.argmax(predictions)]
-        return predicted_class
-    except Exception as e:
-        print(f"Error in classify_image: {e}")
-        return "Error in classification"
-
-
-def preprocess_image(image):
-    image_content = image.read()
-    if not image_content:
-        raise ValueError("Image content is empty")
-
-    image = tf.image.decode_image(image_content, channels=3)
-
-    image = tf.image.resize(image, [128, 128])
-
-    image = image / 255.0
-    image = tf.expand_dims(image, axis=0)
-
-    return image
 
 
 def upload_success(request):

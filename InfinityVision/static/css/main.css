@@ -244,8 +244,10 @@ h6 {
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
     list-style: none;
     align-items: center;
+    margin-left: -175px;
   }
 
   .navmenu li {

@@ -9,7 +9,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
     path('image_process/', include('image_process.urls')),
+    path('pdf_process/', include('pdf_process.urls')),
+    path('chat/', include('chat.urls')),
     path('users/', include('users.urls')),
     path('facts/', views.facts, name='facts')
 ]

@@ -1,17 +1,25 @@
+# Use the base image
 FROM continuumio/miniconda3
 
-WORKDIR /app/InfinityVision
+# Set working directory
+WORKDIR /app/InfinityVision/InfinityVision
 
-COPY environment.yml .
-
+# Copy environment.yml and install dependencies
+COPY environment.yml ./
 RUN conda env create -f environment.yml
 
-SHELL ["conda", "run", "-n", "InfinityVision", "/bin/bash", "-c"]
+# Install additional packages and spaCy model within the same environment
+RUN conda run --name InfinityVision pip install gunicorn faiss-cpu PyMuPDF transformers spacy && \
+    conda run --name InfinityVision python -m spacy download en_core_web_lg
 
-RUN pip install django gunicorn
-
+# Copy the entire project
 COPY . .
 
+# Make entrypoint.sh executable
+RUN chmod +x entrypoint.sh
+
+# Expose port 8000
 EXPOSE 8000
 
-CMD ["conda", "run", "--no-capture-output", "-n", "InfinityVision", "gunicorn", "InfinityVision.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run the entrypoint script
+CMD ["./entrypoint.sh"]

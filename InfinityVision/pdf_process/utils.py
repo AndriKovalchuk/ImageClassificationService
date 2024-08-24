@@ -1,11 +1,11 @@
 import io
 
 import faiss
-import fitz
+import fitz  # PyMuPDF
 import numpy as np
 import spacy
 
-
+# Load SpaCy model
 nlp = spacy.load("en_core_web_lg")
 FAISS_INDEX_PATH = 'faiss_index/faiss_index_file.index'
 
@@ -26,9 +26,9 @@ def vectorize_text(text):
 
 
 def create_faiss_index(vectors, dimension):
-    index = faiss.IndexFlatL2(dimension)
+    index = faiss.IndexFlatL2(dimension)  # Using L2 distance
     index.add(np.array(vectors))
-    faiss.write_index(index, FAISS_INDEX_PATH)
+    faiss.write_index(index, FAISS_INDEX_PATH)  # Save index to file
     return index
 
 
@@ -48,10 +48,12 @@ def add_document_to_index(pdf_id, text):
     vector = get_vector_from_text(text)
     dimension = len(vector)
 
+    # Load existing index or create a new one if it doesn't exist
     index = load_faiss_index(FAISS_INDEX_PATH)
     if index is None:
         index = faiss.IndexFlatL2(dimension)
 
-    vector = np.array([vector], dtype=np.float32)
+    # Add vector to the index
+    vector = np.array([vector], dtype=np.float32)  # Ensure the vector is in the correct format
     index.add(vector)
-    faiss.write_index(index, FAISS_INDEX_PATH)
+    faiss.write_index(index, FAISS_INDEX_PATH)  # Save index to file

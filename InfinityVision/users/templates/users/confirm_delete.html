@@ -6,20 +6,20 @@
             max-width: 500px;
             margin: 50px auto;
             padding: 20px;
-            background: #fff;
+            background: #000000;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .confirmation-container h2 {
-            color: #dc3545; /* Red color for heading */
+            color: #27a776; /* Red color for heading */
             margin-bottom: 20px;
         }
 
         .confirmation-container p {
             font-size: 16px;
-            color: #333;
+            color: #fafafac6;
             margin-bottom: 20px;
         }
 
@@ -46,7 +46,7 @@
         }
 
         .confirmation-container a {
-            color: #007bff; /* Blue color for the link */
+            color: #27a776; /* Blue color for the link */
             text-decoration: none;
             font-size: 16px;
         }
@@ -56,6 +56,10 @@
         }
     </style>
 </head>
+<br>
+<br>
+<br>
+<br>
     <div class="confirmation-container">
         <h2>Confirm Deletion</h2>
         <p>Are you sure you want to delete your account? This action cannot be undone.</p>
@@ -65,4 +69,12 @@
             <a href="{% url 'users:user_view' user.username %}">Cancel</a>
         </form>
     </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

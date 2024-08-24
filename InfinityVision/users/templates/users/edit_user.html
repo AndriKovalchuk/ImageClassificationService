@@ -7,7 +7,7 @@
             max-width: 700px;
             margin: 50px auto;
             padding: 40px;
-            background: #fff;
+            background: #000000;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -15,7 +15,7 @@
         }
 
         .edit-profile-container h2 {
-            color: #007bff;
+            color: #fafafa;
             margin-bottom: 30px;
             font-size: 1.8em;
         }
@@ -35,7 +35,7 @@
 
         .edit-profile-container .form-group label {
             font-size: 16px;
-            color: #333;
+            color: #fafafacf;
             margin-bottom: 8px;
             display: block;
         }
@@ -55,21 +55,43 @@
             margin-top: 5px;
         }
 
-        .edit-profile-container button {
-            background-color: #007bff;
-            color: white;
-            border: none;
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        .button-container button, .button-container a {
+            width: 48%;
             padding: 15px 25px;
             border-radius: 8px;
-            cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s, transform 0.2s;
-            margin-top: 10px;
+        }
+
+        .edit-profile-container button {
+            background-color: #27a776;
+            color: white;
+            border: none;
         }
 
         .edit-profile-container button:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
+        }
+
+        .back-to-profile-btn {
+            background-color: #27a776;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .back-to-profile-btn:hover {
+            background-color: #059652;
         }
     </style>
 </head>
@@ -123,7 +145,10 @@
                     </div>
                 {% endif %}
             </div>
-            <button type="submit">Save Changes</button>
+            <div class="button-container">
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'users:user_view' user.username %}" class="back-to-profile-btn">Back to Profile</a>
+            </div>
         </form>
     </div>
 </body>
