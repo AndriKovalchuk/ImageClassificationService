@@ -1,0 +1,92 @@
+.registration-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #000000;
+    border: 1px solid #000000; 
+}
+
+.registration-card h2 {
+    font-family: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    font-size: 24px;
+    color: #fafafa; 
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+
+.registration-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.registration-card form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #27a776; 
+    color: #fafafa; 
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.registration-card form button:hover {
+    background-color: #059652; 
+}
+
+
+.registration-card p {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+
+.registration-card p a {
+    color: #27a776;
+    text-decoration: none;
+}
+
+
+.registration-card p a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+.registration-card form input {
+    background-color: #373737;
+    color: #fafafa;
+    border: 1px solid #444444; 
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+.registration-card form input:focus,
+.registration-card form input:active {
+    background-color: #444444; 
+    border-color: #27a776; 
+    outline: none; 
+    color: #fafafa; 
+}
+
+
+
+:root {
+    --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --heading-font: "Cardo",  sans-serif;
+    --nav-font: "Inter",  sans-serif;
+  }
+
+
