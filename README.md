@@ -2,13 +2,13 @@
   <img src="readme_img/logo.png" style="width: 400px;" alt="Logo">
 </div>
 
-# Вебзастосунок <span style="color:purple">InfinityVision</span> класифікує завантажені в нього зображення за допомогою Convolutional Neural Network.
+# Вебзастосунок *InfinityVision*, розроблений командою *Infinity*, класифікує завантажені в нього зображення за допомогою *Convolutional Neural Network*.
 # Розроблений на базі фреймворку [Django](https://www.djangoproject.com/)
-# Використовується модель "model_2_finetuned.h5".
+# Модель "model_3_finetuned.h5", що класифікує зображення, натренована на датасеті [CIFAR-10](https://www.kaggle.com/c/cifar-10).
 
-## Model_2_finetuned
+## Model_3_finetuned
 
-В моделі "model_2_finetuned.h5" використаний підхід донавчання (Fine-tuning) на попередньо навченій моделі "model_2_vgg16.h5":
+В моделі "model_3_finetuned.h5" використаний підхід донавчання (Fine-tuning) на попередньо навченій моделі "model_3_vgg16.h5":
 
 <div style="text-align: left;">
   <img src="readme_img/acc_compare.png" style="width: 900px;" alt="Acc_Compare">
@@ -22,7 +22,7 @@
 
 ![accurasy_finetuned.png](readme_img/accurasy_finetuned.png)
 
-### Історія тренування "model_2_finetuned.h5":
+### Історія тренування "model_3_finetuned.h5":
 
 <div style="text-align: left;">
   <img src="readme_img/acc_loss_finetuned.png" style="width: 900px;" alt="Acc_Loss_finetuned">
@@ -35,20 +35,13 @@
 </div>
 
 
-## Model_2_vgg16
-
-Основна модель "model_2_vgg16"
+## Основна модель Model_3_vgg16
 
 ### Гіперпараметри:
-* img_size: Встановлює розмір зображень у 56x56 пікселів. CIFAR-10 спочатку має розмір зображень 32x32, тому вони збільшуються до 56x56.
+* img_size: Встановлює розмір зображень у 128x128 пікселів.
 * num_classes: Кількість класів для класифікації (10 класів у CIFAR-10).
-* batch_size: Розмір батчу під час навчання (128).
-* epochs: Кількість епох для навчання (10).
-
-![GP.png](readme_img/GP.png)
-
-### Гіперпараметри для аугментації зображень:
-* rotation_range, width_shift_range, height_shift_range, shear_range, zoom_range, horizontal_flip, fill_mode
+* batch_size: Розмір батчу під час навчання (512).
+* epochs: Кількість епох для навчання (5).
 
 ### Створення базової моделі VGG16:
 * VGG16: Використовується попередньо навчена модель VGG16 (без верхніх шарів), яка завантажує попередньо навчені ваги з ImageNet.
@@ -69,11 +62,21 @@
 ### EarlyStopping колбек:
 * EarlyStopping: Застосовується для зупинки навчання, якщо показник валідації не покращується протягом заданої кількості епох (5), з автоматичним відновленням найкращих ваг.
 
-## Модель VGG16 загалом містить 21 шар:
+## Модель VGG16 загалом містить 23 шари:
+
+<div style="text-align: left;">
+  <img src="readme_img/model.jpg" style="width: 700px;" alt="Summ">
+</div>
+
+### Базові
+* 1 вхідний шар "input_2"
 * 13 згорткових шарів.
-* 3 шари підвибірки (Max Pooling), по одному після кожного з блоків згорткових шарів.
-* 3 повнозв’язних (Dense) шари: останні шари, які зазвичай використовуються для класифікації (у класичній VGG16 архітектурі). Однак, у цьому коді вони замінені на інші шари.
-* 2 шари активації: для останнього вихідного шару використовується Softmax
+* 5 шари підвибірки (Max Pooling), по одному після кожного з блоків згорткових шарів.
+### Класифікаційна частина
+* flatten_1: Шар Flatten, який розплющує тривимірний тензор у вектор розміром 8192 (4x4x512).
+* dense_2: Повнозв'язний шар (Dense) з 256 нейронами та активацією ReLU.
+* dropout_1: Шар Dropout з коефіцієнтом 0.5, який випадково вимикає половину нейронів під час кожної ітерації навчання.
+* dense_3: Вихідний повнозв'язний шар (Dense) з 10 нейронами (по одному для кожного класу CIFAR-10) і активацією softmax для передбачення ймовірності кожного класу.
 
 <div style="text-align: left;">
   <img src="readme_img/summ.png" style="width: 550px;" alt="Summ">
