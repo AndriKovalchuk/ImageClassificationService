@@ -15,3 +15,5 @@ media/
 *.backup
 *.iml
 *.pyd
+venv/
+.venv/
