@@ -18,8 +18,12 @@
                         text-align: justify;
                         padding: 20px;
                     ">
-                        Вебзастосунок InfinityVision класифікує завантажені в нього зображення за допомогою
-                        Convolutional Neural Network.
+                        Вебзастосунок InfinityVision за допомогою Convolutional Neural Network
+                        класифікує завантажені в нього зображення.
+                        Також, застосунок вміє автоматично знаходити відповіді на запитання з великого обсягу
+                        текстових даних із підвантаженого в нього PDF документа, використовуючи Large Language Model.
+                        LLM "roberta-base-squad2" розроблена deepset на основі Transformer, навчена англійському тексту,
+                        відповідає на запитання з текстових даних із підвантаженого PDF документа.
                         Застосунок розроблений на базі фреймворку Django.
                         Модель, що класифікує зображення, натренована на датасеті CIFAR-10.
                         Як згорткову основу використано VGG-16.
@@ -42,24 +46,19 @@
                         text-align: justify;
                         padding: 20px;
                     ">
-                        The InfinityVision web application classifies images uploaded to it using a Convolutional Neural
-                        Network.
-                        The application is developed based on the Django framework.
-                        The model that classifies images was trained on the CIFAR-10 dataset, with VGG-16 used as the
-                        convolutional base.
-                        In total, two models were successfully trained in terms of accuracy.
-                        The first model had a size of 56x56 pixels, was trained for 10 epochs, and achieved an accuracy
-                        of 92%, but after applying additional training for 5 more epochs, it reached an accuracy of 94%.
-                        After analyzing and testing the model, it was decided to increase the image size to 128x128
-                        pixels.
-                        Therefore, the second model had a size of 128x128 pixels, was trained for 5 epochs, and achieved
-                        an accuracy of 92%.
-                        Additional training for 10 epochs was also applied to the second model, raising the accuracy to
-                        93%.
-                        Although the accuracy of the second model was 1% lower than the previous one, it performed
-                        better at classifying images that were not part of the dataset.
-                        Based on the test results, it was decided to use the model trained on images with a size of
-                        128x128 pixels in the application.
+                        The web application InfinityVision uses a Convolutional Neural Network to classify uploaded images.
+                        The application also automatically finds answers to questions from large volumes of text data in
+                        uploaded PDF documents using a Large Language Model. The LLM "roberta-base-squad2" developed by
+                        deepset, based on the Transformer architecture and trained on English text, answers questions
+                        from text data in. The image classification model is trained on the CIFAR-10 dataset, using
+                        VGG-16 as the convolutional base. Two successful models were trained in terms of accuracy.
+                        First model: Trained on 56x56 pixel images, achieved 92% accuracy after 10 epochs,
+                        and improved to 94% accuracy after fine-tuning for 5 additional epochs.
+                        Second model: Trained on 128x128 pixel images, achieved 92% accuracy after 5 epochs,
+                        and improved to 93% accuracy after fine-tuning for 10 additional epochs.
+                        Although the accuracy of the second model was 1% lower than the previous one,
+                        it performed better in classifying images that were not part of the dataset.
+                        Based on the testing results, it was decided to use the model trained on 128x128 pixel images in the application.
                     </h4>
                 </div>
             </div>
