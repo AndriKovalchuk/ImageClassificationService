@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 import numpy as np
 import tensorflow as tf
@@ -17,8 +18,15 @@ model.summary()
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 
+def get_file_name(file_path):
+    file_path_components = file_path.split('/')
+    file_name_and_extension = file_path_components[-1].rsplit('.', 1)
+    return file_name_and_extension[0]
+
+
 @login_required
 def upload_image(request):
+    error_message = None
     if request.method == 'POST':
         form = FileFieldForm(request.POST, request.FILES)
         if form.is_valid():
@@ -27,24 +35,36 @@ def upload_image(request):
             predictions = []
 
             for file in files:
-                print(file)
-                image_document = IMAGE(file=file, user=request.user, original_name=file.name)
-                img = image.load_img(file.file, target_size=(128, 128))  # Змінюємо розмір на 56x56
-                img_array = image.img_to_array(img)
-                img_array = np.expand_dims(img_array, axis=0)  # Додаємо розмір для batch
-                img_array = img_array / 255.0  # Нормалізуємо значення пікселів
+                file_extension = pathlib.Path(file.name).suffix
+                if file_extension in [".jpg", ".jpeg", ".webp", ".bmp", ".png"]:
+                    image_document = IMAGE(file=file, user=request.user, original_name=file.name)
+                    img = image.load_img(file.file, target_size=(128, 128))
+                    img_array = image.img_to_array(img)
+                    img_array = np.expand_dims(img_array, axis=0)
+                    img_array = img_array / 255.0
 
-                predictions = model.predict(img_array)
+                    predictions = model.predict(img_array)
+                    predicted_class = np.argmax(predictions[0])
+                    predicted_class = class_names[predicted_class]
 
-                predicted_class = np.argmax(predictions[0])
-                predicted_class = class_names[predicted_class]
-                image_document.predicted_class = predicted_class
-                image_document.save()
-                image_documents.append(image_document)
+                    image_document.predicted_class = predicted_class
+                    image_document.save()
+                    image_documents.append(image_document)
 
-            return render(request, 'image_process/upload_success.html', {
-                'images': zip(image_documents, predictions)
-            })
+                else:
+                    error_message = 'Only image files are allowed'
+
+            if error_message:
+                return render(request, 'image_process/upload_image.html',
+                              {'form': form, "error_message": error_message})
+
+                    # form.add_error(None, "Only image files are allowed.")
+                    # return render(request, 'image_process/upload_image.html', {'form': form})
+
+            # return render(request, 'image_process/upload_success.html', {
+            #     'images': zip(image_documents, predictions)
+            # })
+
     else:
         form = FileFieldForm()
     return render(request, 'image_process/upload_image.html', {'form': form})

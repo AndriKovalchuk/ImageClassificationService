@@ -3,7 +3,7 @@
 {% block content %}
 <style>
     body {
-        font-family: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         background-color: #060606;
         margin: 0;
         padding: 0;
@@ -88,17 +88,30 @@
         }
     }
     .centered-heading {
-                text-align: center;
-            }
+        text-align: center;
+    }
     .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .btn-small {
+        width: 200px;
+        text-align: center;
     }
 
-    .btn-small {
-    width: 200px; 
-    text-align: center;
+    /* Error message styling */
+    .error-message {
+        color: #ff4d4f;
+        background-color: #330000;
+        border: 1px solid #ff1a1a;
+        border-radius: 5px;
+        padding: 12px 20px;
+        text-align: center;
+        margin-top: 20px;
+        width: auto;
+        font-size: 16px;
+        box-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
     }
 </style>
 <br>
@@ -110,19 +123,23 @@
         {{ form.file_field }}
         <p>Only image files are allowed. You can select multiple files.</p>
     </div>
+
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+<!--    {% if form.errors and form.non_field_errors %}-->
+<!--    <div class="alert alert-danger" role="alert">-->
+<!--        {{ form.non_field_errors }}-->
+<!--        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>-->
+<!--    </div>-->
+    {% endif %}-->
+
     <button type="submit">Upload</button>
 </form>
+
+
 <div class="btn-container">
     <a href="{% url 'image_process:my_images' %}" class="btn btn-small">My Images</a>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 {% endblock %}
