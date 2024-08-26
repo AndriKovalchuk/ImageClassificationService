@@ -2,10 +2,13 @@
   <img src="readme_img/logo.png" style="width: 400px;" alt="Logo">
 </div>
 
-# Вебзастосунок *InfinityVision*, розроблений командою *Infinity*, класифікує завантажені в нього зображення за допомогою *Convolutional Neural Network*.
+# Вебзастосунок *InfinityVision*, розроблений командою *Infinity*, класифікує, за допомогою *Convolutional Neural Network*, завантажені в нього зображення.
+# Також, застосунок вміє автоматично знаходити відповіді на запитання з великого обсягу текстових даних із підвантаженого в нього PDF документа, використовуючи Large Language Model.
 # Розроблений на базі фреймворку [Django](https://www.djangoproject.com/)
 # Модель "model_3_finetuned.h5", що класифікує зображення, натренована на датасеті [CIFAR-10](https://www.kaggle.com/c/cifar-10).
 
+
+# Convolutional Neural Network
 ## Model_3_finetuned
 
 В моделі "model_3_finetuned.h5" використаний підхід донавчання (Fine-tuning) на попередньо навченій моделі "model_3_vgg16.h5":
@@ -97,4 +100,24 @@
 <div style="text-align: left;">
   <img src="readme_img/conf_mat.png" style="width: 600px;" alt="Conf_Mat">
 </div>
+
+# Large Language Model
+## Модель [roberta-base-squad2](https://huggingface.co/deepset/roberta-base-squad2#about-us)
+
+### Модель roberta-base-squad2 є модифікованою версією архітектури RoBERTa, спеціально налаштованою для завдання відповіді на запитання на основі тексту, 
+### відомого як SQuAD2.0 (Stanford Question Answering Dataset).
+
+<div style="text-align: left;">
+  <img src="readme_img/authors_rbs.png" style="width: 400px;" alt="Conf_Mat">
+</div>
+
+### Основні характеристики deepset/roberta-base-squad2:
+* Архітектура RoBERTa: Модель базується на модифікованій версії BERT, де основну увагу приділено оптимізації продуктивності шляхом зменшення довжини послідовностей і використання більшої кількості тренувальних даних.
+* Задача SQuAD2.0: Ця модель натренована на SQuAD2.0, де крім відповіді на питання, модель повинна визначити, чи питання має відповідь у тексті.
+* Тонке налаштування: Модель була додатково налаштована на конкретні вимоги задачі SQuAD2.0, щоб досягти кращої точності в контекстах, де немає відповіді.
+
+<div style="text-align: left;">
+  <img src="readme_img/overview_NLP.png" style="width: 400px;" alt="Conf_Mat">
+</div>
+
 
