@@ -37,6 +37,7 @@ urlpatterns = [
     path("<str:username>/", views.user_view, name="user_view"),
 
     path('<str:username>/edit/', views.edit_user, name='edit_user'),
+    path('<str:username>/change_password/', views.change_password, name='change_password'),
     path('<str:username>/delete/', views.delete_user, name='delete_user'),
 
 ]

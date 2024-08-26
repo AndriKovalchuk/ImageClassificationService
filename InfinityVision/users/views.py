@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import RegistrationForm, LoginForm, UserEditForm
+from .forms import RegistrationForm, LoginForm, UserEditForm, PasswordChangeForm
 
 
 class RegisterView(View):
@@ -100,12 +100,16 @@ def edit_user(request, username):
         if form.is_valid():
             user = form.save(commit=False)
 
-            new_password1 = form.cleaned_data.get('new_password1')
-            if new_password1:
-                user.set_password(new_password1)
-                user.save()
+            new_username = form.cleaned_data.get('username')
+            new_email = form.cleaned_data.get('email')
 
-                update_session_auth_hash(request, user)
+            if new_username:
+                user.username = new_username
+            if new_email:
+                user.email = new_email
+            user.save()
+
+            update_session_auth_hash(request, user)
             messages.success(request, "Profile updated successfully.")
             return redirect('users:user_view', username=request.user.username)
         else:
@@ -114,6 +118,35 @@ def edit_user(request, username):
         form = UserEditForm(instance=request.user)
 
     return render(request, 'users/edit_user.html', {
+        'form': form,
+        'username': username
+    })
+
+
+@login_required
+def change_password(request, username):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+
+            new_password1 = form.cleaned_data.get('new_password1')
+
+            if new_password1:
+                user.set_password(new_password1)
+                user.save()
+
+                update_session_auth_hash(request, user)
+
+                messages.success(request, "Password changed successfully.")
+                return redirect('users:user_view', username=request.user.username)
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordChangeForm(instance=request.user)
+
+    return render(request, 'users/edit_user_password.html', {
         'form': form,
         'username': username
     })

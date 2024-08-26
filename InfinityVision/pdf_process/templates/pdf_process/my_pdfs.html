@@ -8,28 +8,20 @@
     <title>Uploaded PDF Documents</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #000000;
             margin: 0;
             padding: 0;
         }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
         h1 {
             text-align: center;
-            color: #333;
+            color: #fafafa;
             margin-bottom: 30px;
             font-size: 2em;
             font-weight: bold;
         }
         .card {
-            background: #f9f9f9;
+            background: #333;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -49,7 +41,7 @@
         .card-body h3 {
             margin: 0;
             font-size: 18px;
-            color: #333;
+            color: #fafafa;
             font-weight: normal;
         }
         .card-body .buttons {
@@ -67,23 +59,23 @@
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
         .card-body a.view-pdf {
-            background-color: #28a745;
+            background-color: #27a776;
             color: #fff;
         }
         .card-body a.view-pdf:hover {
-            background-color: #218838;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .card-body a.ai-chat {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
         }
         .card-body a.ai-chat:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
         }
         .btn {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
             border: none;
             padding: 12px 20px;
@@ -97,9 +89,37 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #059652;
             transform: scale(1.05);
         }
+
+
+        .btn1 {
+            display: inline-block; 
+            margin: 0 auto;
+            text-align: center;
+            background-color: #27a776;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn1-container {
+            text-align: center; 
+        }
+
+
+
+        .btn1:hover {
+            background-color: #059652;
+            transform: scale(1.05);
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -117,6 +137,10 @@
     </style>
 </head>
 <body>
+<br>
+<br>
+<br>
+<br>
 <h1>My PDFs</h1>
 {% if pdfs %}
 <div class="container">
@@ -137,6 +161,8 @@
     <p>No PDFs uploaded yet.</p>
 </div>
 {% endif %}
-<a href="{% url 'pdf_process:upload_pdf' %}" class="btn">Upload New PDF</a>
+<div class="btn1-container">
+<a href="{% url 'pdf_process:upload_pdf' %}" class="btn1">Upload New PDF</a>
+</div>
 </body>
 {% endblock %}

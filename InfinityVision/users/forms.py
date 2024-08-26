@@ -40,20 +40,45 @@ class UserEditForm(UserChangeForm):
         label='Current Password',
         widget=forms.PasswordInput(attrs={"class": "form-control"})
     )
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'current_password']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        current_password = cleaned_data.get("current_password")
+        # new_password1 = cleaned_data.get("new_password1")
+        # new_password2 = cleaned_data.get("new_password2")
+
+        if not self.instance.check_password(current_password):
+            self.add_error('current_password', 'Current password is incorrect.')
+
+        # if new_password1 and new_password2 and new_password1 != new_password2:
+        #     self.add_error('new_password2', 'New passwords do not match.')
+
+        return cleaned_data
+
+
+class PasswordChangeForm(UserChangeForm):
+    current_password = forms.CharField(
+        label='Current Password',
+        widget=forms.PasswordInput(attrs={"class": "form-control"})
+    )
     new_password1 = forms.CharField(
         label='New Password',
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        required=False
+        required=True
     )
     new_password2 = forms.CharField(
         label='Confirm New Password',
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        required=False
+        required=True
     )
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'current_password', 'new_password1', 'new_password2']
+        fields = ['current_password', 'new_password1', 'new_password2']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -64,7 +89,13 @@ class UserEditForm(UserChangeForm):
         if not self.instance.check_password(current_password):
             self.add_error('current_password', 'Current password is incorrect.')
 
-        if new_password1 and new_password2 and new_password1 != new_password2:
-            self.add_error('new_password2', 'New passwords do not match.')
+        if new_password1 and new_password2:
+            if new_password1 != new_password2:
+                self.add_error('new_password2', 'New passwords do not match.')
+        else:
+            if not new_password1:
+                self.add_error('new_password1', 'New password is required.')
+            if not new_password2:
+                self.add_error('new_password2', 'Confirm new password is required.')
 
         return cleaned_data

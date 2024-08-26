@@ -9,50 +9,54 @@
     <title>Upload Success</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #060606;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            max-width: 500px;
             text-align: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px;
         }
-        h1 {
-            color: #4caf50;
+        h2 {
+            color: #fafafa;
             margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         p {
-            color: #333;
-            margin-bottom: 30px;
+            font-size: 18px;
+            color: #fafafa50;
+            margin-bottom: 20px;
         }
         .btn {
-            background-color: #007bff;
+            background-color: #27a776;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 14px 24px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            text-align: center;
             text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #059652;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-<h1>Upload Successful!</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Upload Successful!</h2>
 <p>Your PDF document has been uploaded and processed successfully.</p>
 <a href="{% url 'pdf_process:my_pdfs' %}" class="btn">Back to My PDFs</a>
 </body>

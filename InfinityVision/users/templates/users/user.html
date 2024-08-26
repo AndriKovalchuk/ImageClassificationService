@@ -13,7 +13,7 @@
             padding: 0;
         }
         .profile-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
             background: #fafafa50;
@@ -83,27 +83,19 @@
     </style>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <div class="profile-container">
-        <br>
-        <h1>{{ user.username }}</h1>
-        <p>Email: {{ user.email }}</p>
-        <a href="{% url 'users:edit_user' user.username %}" class="btn btn-edit">Edit Profile</a>
-        <a href="#" class="btn btn-edit">Change Password</a>
-        <a href="{% url 'users:delete_user' user.username %}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">Delete User Profile</a>
-        <br>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<br>
+<br>
+<br>
+<br>
+<div class="profile-container">
+    <h1>{{ user.username }}</h1>
+    <p>Email: {{ user.email }}</p>
+    <a href="{% url 'users:edit_user' user.username %}" class="btn btn-edit">Edit Profile</a>
+    <a href="{% url 'users:change_password' user.username %}" class="btn btn-edit">Change Password</a>
+    <a href="{% url 'users:delete_user' user.username %}" class="btn btn-delete"
+       onclick="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">Delete
+        Profile</a>
+    <a href="{% url 'users:logout' %}" class="btn btn-delete">Logout</a>
+</div>
 </body>
 {% endblock %}

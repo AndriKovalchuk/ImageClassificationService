@@ -3,8 +3,8 @@ from django.db import models
 
 
 class PDFDocument(models.Model):
-    file = models.FileField(upload_to='documents/')
-    original_name = models.CharField(max_length=255, blank=True, null=True)
+    file = models.FileField(upload_to='documents/')  # збереження файлу
+    original_name = models.CharField(max_length=255, blank=False, null=True)
     text = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 

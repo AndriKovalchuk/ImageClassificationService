@@ -1,4 +1,8 @@
 import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#print(f"BASE_DIR: {BASE_DIR}")
+
 import pathlib
 
 import numpy as np
@@ -10,18 +14,11 @@ from tensorflow.keras.preprocessing import image
 from .forms import FileFieldForm, EditImageNameForm
 from .models import IMAGE
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(BASE_DIR, 'models', 'model_3_finetuned.h5')
 model = tf.keras.models.load_model(MODEL_PATH)
-model.summary()
+#model.summary()
 
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
-
-
-def get_file_name(file_path):
-    file_path_components = file_path.split('/')
-    file_name_and_extension = file_path_components[-1].rsplit('.', 1)
-    return file_name_and_extension[0]
 
 
 @login_required
@@ -33,18 +30,20 @@ def upload_image(request):
             files = request.FILES.getlist('file_field')
             image_documents = []
             predictions = []
+            not_uploaded_files = []
 
             for file in files:
+                #print(file)
                 file_extension = pathlib.Path(file.name).suffix
                 if file_extension in [".jpg", ".jpeg", ".webp", ".bmp", ".png"]:
                     image_document = IMAGE(file=file, user=request.user, original_name=file.name)
-                    img = image.load_img(file.file, target_size=(128, 128))
-                    img_array = image.img_to_array(img)
-                    img_array = np.expand_dims(img_array, axis=0)
+                    img = image.load_img(file.file, target_size=(128, 128))  # завантажуємо зображення, масштабуючи до розміру 128*128
+                    img_array = image.img_to_array(img)  # перетворюємо на масив numpy
+                    img_array = np.expand_dims(img_array, axis=0)  # розширюємо ще одним виміром
                     img_array = img_array / 255.0
 
                     predictions = model.predict(img_array)
-                    predicted_class = np.argmax(predictions[0])
+                    predicted_class = np.argmax(predictions[0])  # індекс класу з найбільшою ймовірністю
                     predicted_class = class_names[predicted_class]
 
                     image_document.predicted_class = predicted_class
@@ -52,18 +51,18 @@ def upload_image(request):
                     image_documents.append(image_document)
 
                 else:
-                    error_message = 'Only image files are allowed'
+                    not_uploaded_files.append(file.name)
+                    #print(not_uploaded_files)
+                    files_failed = ", ".join(not_uploaded_files)
+                    error_message = f'Only image files are allowed.\nFile: {files_failed} was not uploaded.'
 
             if error_message:
                 return render(request, 'image_process/upload_image.html',
                               {'form': form, "error_message": error_message})
 
-                    # form.add_error(None, "Only image files are allowed.")
-                    # return render(request, 'image_process/upload_image.html', {'form': form})
-
-            # return render(request, 'image_process/upload_success.html', {
-            #     'images': zip(image_documents, predictions)
-            # })
+            return render(request, 'image_process/upload_success.html', {
+                'images': zip(image_documents, predictions)
+            })
 
     else:
         form = FileFieldForm()
@@ -90,28 +89,6 @@ def my_images(request):
 
 
 @login_required
-def classify_image_view(request, image_id):
-    image = get_object_or_404(IMAGE, id=image_id, user=request.user)
-
-    try:
-        predicted_class = classify_image(image.file)
-        return render(request, 'image_process/edit_image.html', {
-            'image': image,
-            'predicted_class': predicted_class
-        })
-    except ValueError as e:
-        return render(request, 'image_process/edit_image.html', {
-            'image': image,
-            'error': str(e)
-        })
-    except Exception as e:
-        return render(request, 'image_process/edit_image.html', {
-            'image': image,
-            'error': 'An error occurred during image processing'
-        })
-
-
-@login_required
 def delete_image(request, image_id):
     image = get_object_or_404(IMAGE, id=image_id, user=request.user)
     image.delete()
@@ -131,3 +108,13 @@ def edit_image_name(request, image_id):
         form = EditImageNameForm(instance=image)
 
     return render(request, 'image_process/edit_image_name.html', {'form': form, 'image': image})
+
+
+@login_required
+def classify_image_view(request, image_id):
+    image = get_object_or_404(IMAGE, id=image_id, user=request.user)
+
+    return render(request, 'image_process/edit_image.html', {
+        'image': image,
+        'predicted_class': image.predicted_class
+    })
