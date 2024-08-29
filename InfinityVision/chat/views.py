@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from pdf_process.models import PDFDocument, QueryHistory
+from pdf_process.models import Document, QueryHistory
 from transformers import pipeline
 
 model_name = "deepset/roberta-base-squad2"  # локально
@@ -10,7 +10,7 @@ nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)  # 
 
 @login_required
 def chat(request, document_id):
-    document = PDFDocument.objects.get(id=document_id, user=request.user)
+    document = Document.objects.get(id=document_id, user=request.user)
 
     # print(f"PDF Text: {document.text}")
 

@@ -1,9 +1,15 @@
 from django import forms
 
-from .models import PDFDocument
+from .models import Document
 
 
-class PDFDocumentForm(forms.ModelForm):
+class DocumentForm(forms.ModelForm):
     class Meta:
-        model = PDFDocument
+        model = Document
         fields = ['file']
+
+
+class EditDocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ['original_name']

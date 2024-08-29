@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'image_process',
     'users',
     'pdf_process',
-    'chat'
-
+    'chat',
 ]
 
 MIDDLEWARE = [

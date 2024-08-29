@@ -121,18 +121,18 @@
 <body>
 <br>
 <br>
-    <h2 class="centered-heading">Upload PDF Document</h2>
+    <h2 class="centered-heading">Upload Document</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
-        <label for="id_file">Choose a PDF file:</label>
+        <label for="id_file">Choose a Document to upload:</label>
         {{ form.file }}
-        <p>Only PDF files are allowed.</p>
+        <p>Only 'docx', 'pdf', 'txt' files are allowed.</p>
     </div>
     <button type="submit">Upload</button>
 </form>
 <div class="btn-container">
-<a href="{% url 'pdf_process:my_pdfs' %}" class="btn tn-small">My PDFs</a>
+<a href="{% url 'pdf_process:my_documents' %}" class="btn tn-small">My Documents</a>
 </div>
 </body>
 </html>

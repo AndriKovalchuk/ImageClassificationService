@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class PDFDocument(models.Model):
+class Document(models.Model):
     file = models.FileField(upload_to='documents/')  # збереження файлу
     original_name = models.CharField(max_length=255, blank=False, null=True)
     text = models.TextField(blank=True, null=True)
@@ -14,7 +14,7 @@ class PDFDocument(models.Model):
 
 class QueryHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    document = models.ForeignKey(PDFDocument, on_delete=models.CASCADE)
+    document = models.ForeignKey(Document, on_delete=models.CASCADE)
     question = models.TextField()
     answer = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

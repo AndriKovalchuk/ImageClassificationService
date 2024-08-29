@@ -9,7 +9,7 @@ COPY environment.yml ./
 RUN conda env create -f environment.yml
 
 # Install additional packages and spaCy model within the same environment
-RUN conda run --name InfinityVision pip install gunicorn faiss-cpu PyMuPDF transformers spacy && \
+RUN conda run --name InfinityVision pip install gunicorn faiss-cpu PyMuPDF python-docx transformers spacy Pillow && \
     conda run --name InfinityVision python -m spacy download en_core_web_lg
 
 RUN conda run --name InfinityVision python -c "from transformers import pipeline; pipeline('question-answering', model='deepset/roberta-base-squad2')"

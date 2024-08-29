@@ -1,0 +1,26 @@
+# flyctl launch added from .gitignore
+**\__pycache__
+**\.idea
+**\media
+**\*.py[cod]
+**\*.so
+**\*.log
+**\*.pot
+**\*.pyc
+**\*.pyo
+**\*.sqlite3
+**\*.env
+**\*.pgsql
+**\*.pgadmin
+**\*.dump
+**\*.backup
+**\*.iml
+**\*.pyd
+**\venv
+**\.venv
+
+# flyctl launch added from .idea\.gitignore
+# Default ignored files
+.idea\shelf
+.idea\workspace.xml
+fly.toml

@@ -141,16 +141,17 @@
 <br>
 <br>
 <br>
-<h1>My PDFs</h1>
-{% if pdfs %}
+<h1>My Documents</h1>
+{% if documents %}
 <div class="container">
-    {% for pdf in pdfs %}
+    {% for document in documents %}
     <div class="card">
         <div class="card-body">
-            <h3 class="card-text">{{ pdf.original_name }}</h3>
+            <h3 class="card-text">{{ document.original_name }}</h3>
             <div class="buttons">
-                <a href="{{ pdf.file.url }}" target="_blank" class="view-pdf">View PDF</a>
-                <a href="{% url 'chat' pdf.id %}" class="ai-chat">AI Chat</a>
+                <a href="{% url 'chat' document.id %}" class="ai-chat">AI Chat</a>
+                <a href="{{ document.file.url }}" target="_blank" class="view-pdf">View Document</a>
+                <a href="{% url 'pdf_process:edit_document_view' document.id %}" class="view-pdf">Edit</a>
             </div>
         </div>
     </div>
@@ -158,11 +159,11 @@
 </div>
 {% else %}
 <div class="container">
-    <p>No PDFs uploaded yet.</p>
+    <p>No Documents uploaded yet.</p>
 </div>
 {% endif %}
 <div class="btn1-container">
-<a href="{% url 'pdf_process:upload_pdf' %}" class="btn1">Upload New PDF</a>
+<a href="{% url 'pdf_process:upload_document' %}" class="btn1">Upload New Document</a>
 </div>
 </body>
 {% endblock %}

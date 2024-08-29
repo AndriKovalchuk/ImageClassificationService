@@ -1,0 +1,85 @@
+{% extends 'InfinityVision/base.html' %}
+{% block content %}
+<h1 class="centered-heading"> Edit Document</h1>
+<div class="card">
+    <div class="card-body">
+        <style>
+            .centered-heading {
+                text-align: center;
+            }
+            .responsive-img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            .card-body {
+                text-align: center;
+                padding: 20px;
+            }
+            .card-body h3 {
+                margin: 20px 0;
+                font-size: 1.5em;
+                color: #d3d3d3;
+            }
+            .card-body p {
+                font-size: 1.2em;
+                color: #d3d3d3;
+            }
+            .btn {
+                background-color: #27a776;
+                color: #f3f3f3;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                transition: background-color 0.3s, transform 0.3s;
+                margin: 5px;
+            }
+            .btn:hover {
+                background-color: #059652;
+                transform: scale(1.05);
+            }
+            .btn-edit {
+                background-color: #ffc107;
+            }
+            .btn-edit:hover {
+                background-color: #e0a800;
+            }
+            .btn-delete {
+                background-color: #dc3545;
+            }
+            .btn-delete:hover {
+                background-color: #c82333;
+            }
+
+            @media (max-width: 600px) {
+                .container {
+                    padding: 15px;
+                }
+                .card-body h3 {
+                    font-size: 1.2em;
+                }
+                .card-body p {
+                    font-size: 1em;
+                }
+            }
+        </style>
+        <i class="bi bi-filetype-doc" style="font-size: 5.5em; color: #d3d3d3;"></i>
+
+        <h3 class="card-text">{{ document.original_name }}</h3></p>
+        <div class="button-group">
+            <a href="{% url 'pdf_process:edit_document_name' document.id %}" class="btn btn-edit">Edit Name</a>
+            <a href="{% url 'pdf_process:delete_document' document.id %}" class="btn btn-delete">Delete</a>
+        </div>
+        <a href="{% url 'pdf_process:my_documents' %}" class="btn">Back to My Documents</a>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+{% endblock %}

@@ -1,5 +1,7 @@
 import io
+import pathlib
 
+import docx
 import faiss
 import fitz  # PyMuPDF
 import numpy as np
@@ -10,14 +12,28 @@ nlp = spacy.load("en_core_web_lg")  # повертає вектор довжин
 FAISS_INDEX_PATH = 'faiss_index/faiss_index_file.index'
 
 
-def extract_text_from_pdf(pdf_file):
+def extract_text_from_document(document):
     text = ''
-    pdf_stream = io.BytesIO(
-        pdf_file.read())  # перетворюємо байти PDF-файлу у буфер у пам'яті, що дозволяє працювати з ним як з файлом без збереження на диск
-    with fitz.open(stream=pdf_stream, filetype='pdf') as pdf:
-        for page_num in range(len(pdf)):
-            page = pdf.load_page(page_num)
-            text += page.get_text()
+    file_extension = pathlib.Path(document.name).suffix.lower().replace('.', '')
+
+    if file_extension == 'pdf':
+        pdf_stream = io.BytesIO(document.read())
+        with fitz.open(stream=pdf_stream, filetype='pdf') as pdf:
+            for page_num in range(len(pdf)):
+                page = pdf.load_page(page_num)
+                text += page.get_text()
+
+    elif file_extension == 'docx':
+        doc = docx.Document(document)
+        for para in doc.paragraphs:
+            text += para.text + '\n'
+
+    elif file_extension == 'txt':
+        text = document.read().decode('utf-8')
+
+    else:
+        raise ValueError("Unsupported file type")
+
     return text
 
 
@@ -29,7 +45,8 @@ def add_document_to_index(pdf_id, text):
     # завантажуємо існуючий index або створюємо новий, якщо не існує
     index = load_faiss_index(FAISS_INDEX_PATH)
     if index is None:
-        index = faiss.IndexFlatL2(dimension)  # створюємо новий індекс FAISS типу IndexFlatL2 (метрика євклідову відстань для пошуку найближчих сусідів) + розмірність
+        index = faiss.IndexFlatL2(
+            dimension)  # створюємо новий індекс FAISS типу IndexFlatL2 (метрика євклідову відстань для пошуку найближчих сусідів) + розмірність
 
     vector = np.array([vector], dtype=np.float32)  # перетворюємо вектор у формат масиву numpy
 

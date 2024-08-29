@@ -4,15 +4,18 @@ services:
     image: postgres:latest
     container_name: POSTGRES_DB_Infinity_Vision
     environment:
-      POSTGRES_DB: InfinityVisionDB
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: koyebdb
+      POSTGRES_USER: koyeb-adm
+      POSTGRES_PASSWORD: S2ch4kVWjKFR
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   web:
-    build: . # Image has to be built from Dockerfile located in this directory
+    build:
+      context: . # Image has to be built from Dockerfile located in this directory
+      dockerfile: Dockerfile
+    image: infinityvision:latest
     container_name: WEB_Infinity_Vision
     command: ["/app/InfinityVision/entrypoint.sh"]
     volumes: # Mounting local directory with a directory inside container
