@@ -109,7 +109,7 @@
 </div>
 
 <h2>Large Language Model</h2>
-<h3>Модель <a href="https://huggingface.co/deepset/roberta-base-squad2#about-us">roberta-base-squad2</a></h3>
+<h3>Transformer <a href="https://huggingface.co/deepset/roberta-base-squad2#about-us">roberta-base-squad2</a></h3>
 
 <p>Модель roberta-base-squad2 є модифікованою версією архітектури RoBERTa, спеціально налаштованою для завдання відповіді на запитання на основі тексту, відомого як SQuAD2.0 (Stanford Question Answering Dataset).</p>
 
