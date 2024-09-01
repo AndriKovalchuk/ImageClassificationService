@@ -133,7 +133,7 @@
 <pre>
 <code>
 # Витягніть Docker образ
-docker pull andrikovalchuk/infinityvision
+docker pull andrikovalchuk/infinityvision:latest
 
 # Запустіть контейнер
 docker run -p 8000:8000 andrikovalchuk/infinityvision

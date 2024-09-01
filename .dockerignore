@@ -9,7 +9,7 @@
 **\*.pyc
 **\*.pyo
 **\*.sqlite3
-**\*.env
+#**\*.env
 **\*.pgsql
 **\*.pgadmin
 **\*.dump

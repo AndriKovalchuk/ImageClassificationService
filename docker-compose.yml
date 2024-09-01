@@ -16,6 +16,8 @@ services:
       context: . # Image has to be built from Dockerfile located in this directory
       dockerfile: Dockerfile
     image: infinityvision:latest
+    env_file:
+      - .env
     container_name: WEB_Infinity_Vision
     command: ["/app/InfinityVision/entrypoint.sh"]
     volumes: # Mounting local directory with a directory inside container
